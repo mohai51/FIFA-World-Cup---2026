@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA WORLD CUP - 2026 দল পরিবর্তন চুক্তিপত্র</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Premium Deep Blue & Gold Theme --- */
+        :root {
+            --bg-color: #0b1426;
+            --card-bg: #13223f;
+            --gold: #d4af37;
+            --gold-hover: #f3cf55;
+            --text-white: #ffffff;
+            --text-muted: #8a9bb8;
+            --success-green: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        @media (min-width: 480px) {
+            .form-card {
+                padding: 40px 30px;
+            }
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .trophy-icon {
+            font-size: 3rem;
+            margin-bottom: 5px;
+        }
+
+        .logo-area h1 {
+            font-size: 1.6rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .logo-area p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background: var(--gold-hover);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        button:disabled {
+            background: #555;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .pdf-action-area {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .success-msg {
+            color: var(--success-green);
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .pdf-btn {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .pdf-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-card">
+            <div class="logo-area">
+                <div class="trophy-icon">🏆</div>
+                <h1>FIFA WORLD CUP 2026</h1>
+                <p>অফিসিয়াল ফ্যান ট্রান্সফার মার্কেট</p>
+            </div>
+            
+            <form id="transferForm">
+                <div class="input-group">
+                    <label for="userName">আপনার পূর্ণ নাম</label>
+                    <input type="text" id="userName" required placeholder="এখানে আপনার নাম লিখুন">
+                </div>
+
+                <div class="input-group">
+                    <label for="currentTeam">বর্তমান দল</label>
+                    <input type="text" id="currentTeam" required placeholder="যেমন: আর্জেন্টিনা, ব্রাজিল">
+                </div>
+
+                <div class="input-group">
+                    <label for="newTeam">নতুন দল (যে দলে যোগ দিতে চান)</label>
+                    <input type="text" id="newTeam" required placeholder="যেমন: পর্তুগাল, ফ্রান্স">
+                </div>
+
+                <button type="submit" id="submitBtn">চুক্তিপত্র স্বাক্ষর করুন</button>
+            </form>
+
+            <div class="pdf-action-area" id="pdfActionArea">
+                <p class="success-msg">✓ আপনার তথ্য সফলভাবে রেজিস্টার্ড হয়েছে!</p>
+                <button class="pdf-btn" id="downloadPdfBtn">চুক্তিপত্রটি দেখতে ক্লিক করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       // এখন আর এখানে কোনো বড় লিঙ্কের দরকার নেই, ডিরেক্ট ভারসেল এপিআই রাউট
+const apiURL = '/api/submit';
+
+document.getElementById('transferForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const name = document.getElementById('userName').value;
+    const currentTeam = document.getElementById('currentTeam').value;
+    const newTeam = document.getElementById('newTeam').value;
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'তথ্য জমা হচ্ছে...';
+
+    // ডাটা JSON অবজেক্ট হিসেবে পাঠানো হচ্ছে
+    const payload = {
+        Name: name,
+        CurrentTeam: currentTeam,
+        NewTeam: newTeam
+    };
+
+    fetch(apiURL, { 
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            submitBtn.innerText = 'স্বাক্ষরিত হয়েছে';
+            document.getElementById('pdfActionArea').style.display = 'block';
+
+            document.getElementById('downloadPdfBtn').onclick = function() {
+                const targetURL = `contract.html?name=${encodeURIComponent(name)}&current=${encodeURIComponent(currentTeam)}&new=${encodeURIComponent(newTeam)}`;
+                window.location.href = targetURL;
+            };
+
+            document.getElementById('transferForm').reset();
+        } else {
+            throw new Error(data.error || 'Failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error!', error.message);
+        alert('কোথাও ভুল হয়েছে! আবার চেষ্টা করুন।');
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'চুক্তিপত্র স্বাক্ষর করুন';
+    });
+});
+    </script>
+</body>
+</html>

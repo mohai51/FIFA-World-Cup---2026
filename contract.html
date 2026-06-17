@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অফিসিয়াল দল পরিবর্তন চুক্তিপত্র</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #0b1426;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* পিডিএফ কন্টেইনার রেসপন্সিভ এবং ১ পেজে ফিট করার জন্য অপ্টিমাইজড */
+        .pdf-container {
+            background: #ffffff;
+            color: #111111;
+            padding: 25px 20px;
+            border: 6px double #d4af37;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-radius: 4px;
+        }
+        
+        @media (min-width: 480px) {
+            .pdf-container {
+                padding: 35px 40px;
+                border: 10px double #d4af37;
+            }
+        }
+        
+        .pdf-header { text-align: center; }
+        .pdf-header h1 { color: #0b1426; font-size: 20px; font-weight: 700; margin-bottom: 3px; }
+        .pdf-header p { color: #555; font-size: 12px; font-weight: 600; }
+        
+        @media (min-width: 480px) {
+            .pdf-header h1 { font-size: 24px; }
+            .pdf-header p { font-size: 14px; }
+        }
+        
+        .gold-line { border: 0; height: 2px; background: #d4af37; margin: 15px 0; }
+        
+        .pdf-body { line-height: 1.6; font-size: 13.5px; color: #222; text-align: justify; }
+        @media (min-width: 480px) { .pdf-body { font-size: 15px; line-height: 1.7; } }
+        
+        .highlight { 
+            font-size: 18px; 
+            color: #0b1426; 
+            margin: 8px 0; 
+            font-weight: 700; 
+            text-decoration: underline; 
+            text-align: center;
+        }
+        @media (min-width: 480px) { .highlight { font-size: 22px; } }
+        
+        .transfer-details {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .team-box {
+            background: #f7f9fc;
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            min-width: 110px;
+            text-align: center;
+            flex: 1;
+        }
+        .team-box span { font-size: 11px; color: #777; display: block; margin-bottom: 2px; }
+        .team-box h4 { font-size: 15px; color: #0b1426; font-weight: 700; }
+        
+        @media (min-width: 480px) {
+            .transfer-details { gap: 30px; margin: 20px 0; }
+            .team-box { padding: 12px 25px; min-width: 140px; }
+            .team-box span { font-size: 12px; }
+            .team-box h4 { font-size: 18px; }
+        }
+        
+        .arrow { font-size: 20px; color: #d4af37; }
+        
+        .terms-list {
+            margin-left: 15px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        .terms-list li {
+            margin-bottom: 5px;
+        }
+        
+        .declaration-text {
+            text-align: center; 
+            font-style: italic; 
+            color: #444; 
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .pdf-footer { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end;
+            margin-top: 35px; 
+            font-size: 13px; 
+        }
+        .signature { text-align: center; width: 45%; }
+        .signature p { margin-bottom: 2px; color: #666; }
+        .signature span { font-weight: 600; font-size: 12px; color: #111; }
+        
+        /* --- পেজের নিচের ২টা বাটনের স্টাইল (পিডিএফ কন্টেন্টের বাইরে থাকবে) --- */
+        .btn-wrapper {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 480px) {
+            .btn-wrapper {
+                flex-direction: row;
+            }
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-download {
+            background: #d4af37;
+            color: #000;
+        }
+        .btn-download:hover {
+            background: #f3cf55;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+        .btn-new {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .btn-new:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contractPage" class="pdf-container">
+        <div class="pdf-header">
+            <h1>অফিসিয়াল দল পরিবর্তন চুক্তিপত্র ও হলফনামা</h1>
+            <p>FIFA WORLD CUP 2026 কর্তৃক অনুমোদিত দল পরিবর্তন সেল</p>
+        </div>
+        <hr class="gold-line">
+        <div class="pdf-body">
+            <p>এই চুক্তিপত্রের মাধ্যমে অফিশিয়ালি সত্যায়িত করা যাচ্ছে যে, আমি নিম্নস্বাক্ষরকারী,</p>
+            <div class="highlight" id="pdfName">ইউজার নেম</div>
+            <p>এতদ্বারা সম্পূর্ণ সজ্ঞানে, সুস্থ মস্তিস্কে এবং সশরীরে উপস্থিত থেকে, অন্যের প্ররোচনা ছাড়া নিজের চিন্তাশক্তি ও বিচারবুদ্ধি প্রয়োগ করে এই চূড়ান্ত সিদ্ধান্ত গ্রহণ করছি যে—আমি আমার দীর্ঘদিনের সমর্থিত ফুটবল দল পরিবর্তন করে নতুন দলে অফিশিয়ালি যোগদান করছি।</p>
+            
+            <div class="transfer-details">
+                <div class="team-box">
+                    <span>সাবেক দল</span>
+                    <h4 id="pdfCurrentTeam">দল ১</h4>
+                </div>
+                <div class="arrow">➔</div>
+                <div class="team-box">
+                    <span>নতুন দল</span>
+                    <h4 id="pdfNewTeam">দল ২</h4>
+                </div>
+            </div>
+
+            <p><strong>চুক্তির শর্ত ও অঙ্গীকারনামাসমূহ:</strong></p>
+            <ul class="terms-list">
+                <li>১. আজ হইতে আমি সাবেক দলের সকল প্রকার ট্রোল, ট্র্যাজেডি, পরাজয় এবং ট্রফিহীনতার গ্লানি থেকে নিজেকে সম্পূর্ণ মুক্ত ঘোষণা করিলাম।</li>
+                <li>২. নতুন দলে যোগদানের মুহূর্ত হইতে উক্ত দলের সকল ঐতিহাসিক গৌরব, জয়, অফ-ফর্ম, কিংবা ট্রোলের দায়ভার আমি সমভাবে বহন করিতে বাধ্য থাকিব।</li>
+                <li>৩. দল পরিবর্তনের কারণে বন্ধুমহলে বা সোশ্যাল মিডিয়ায় যদি আমাকে "বেইমান" বা "সুবিধাবাদী" উপাধিতে ভূষিত করা হয়, তবে তাহার সম্পূর্ণ দায় আমার নিজের; এই ব্যাপারে ফ্যান ফেডারেশনের কোনো দায়ভার থাকিবে না।</li>
+                <li>৪. ভবিষ্যতে সাবেক দল কোনো বড় ট্রফি জয় করিলে, আমি কোনোভাবেই সামাজিক যোগাযোগ মাধ্যমে কামব্যাক (Comeback) বা রিঅ্যাকশন পোস্ট দিতে পারিব না।</li>
+            </ul>
+
+            <p><strong>এই অঙ্গীকারনামা ভঙ্গ করিলে আমার ফ্যানশিপ বাতিল বলিয়া গণ্য হইবে।</strong></p>
+            <p class="declaration-text">"আমি স্বেচ্ছায় ও সশরীরে এই চুক্তিপত্রে সম্মতি প্রদান করিলাম।"</p>
+        </div>
+        
+        <div class="pdf-footer">
+            
+            <div class="signature">
+                <p>🏆 <em>FIFA-2026</em></p>
+                <span>অনুমোদিত সিলমোহর</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-wrapper">
+      
+        <a href="index.html" class="action-btn btn-new">🔄 নতুন চুক্তিপত্র তৈরি করুন</a>
+    </div>
+
+    <script>
+        let globalName = "Chuktipotro";
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name') || 'নাম পাওয়া যায়নি';
+            const currentTeam = urlParams.get('current') || 'অনির্ধারিত';
+            const newTeam = urlParams.get('new') || 'অনির্ধারিত';
+            globalName = name;
+
+            document.title = name + "_দল_পরিবর্তন_চুক্তিপত্র";
+            document.getElementById('pdfName').innerText = name;
+            document.getElementById('pdfCurrentTeam').innerText = currentTeam;
+            document.getElementById('pdfNewTeam').innerText = newTeam;
+
+            // ম্যানুয়াল বাটনে ক্লিক ট্রিগার ফিক্স (বিশেষ করে ফেসবুক ও মেসেঞ্জার ইন-অ্যাপ ডাউনলোডের জন্য)
+            document.getElementById('manualDownloadBtn').onclick = function() {
+                generatePDF();
+            };
+        }
+
+        function generatePDF() {
+            const element = document.getElementById('contractPage');
+            
+            // মোবাইল ফ্রেন্ডলি ও সিঙ্গেল পেজ অপ্টিমাইজড কনফিগারেশন
+            const opt = {
+                margin:       [0.2, 0.2, 0.2, 0.2], // মার্জিন কমানো হয়েছে ১ পেজে রাখার জন্য
+                filename:     globalName + '_Chuktipotro.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            // ফেসবুক/মেসেঞ্জার ইন-অ্যাপ ব্রাউজারের সিকিউরিটি বাইপাস করে ব্যাকআপ ডাউনলোড মেকানিজম
+            html2pdf().set(opt).from(element).toPdf().output('blob').then(function (blob) {
+                const blobUrl = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = globalName + '_Chuktipotro.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // ফেসবুক ব্রাউজারে যদি ক্লিক কাজ না করে তার জন্য একটি অল্টারনেটিভ উইন্ডো ব্যাকআপ
+                setTimeout(() => {
+                    window.URL.revokeObjectURL(blobUrl);
+                }, 100);
+            }).catch(err => {
+                // নরমাল সেভ ব্যাকআপ পদ্ধতি যদি ওপরেরটা ফেইল করে
+                html2pdf().set(opt).from(element).save();
+            });
+        }
+    </script>
+</body>
+</html>

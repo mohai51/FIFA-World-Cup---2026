@@ -174,7 +174,7 @@
             <form id="transferForm">
                 <div class="input-group">
                     <label for="userName">আপনার বন্ধুর পূর্ণ নাম</label>
-                    <input type="text" id="userName" required placeholder="এখানে আপনার নাম লিখুন">
+                    <input type="text" id="userName" required placeholder="এখানে আপনার বন্ধুর নাম লিখুন">
                 </div>
 
                 <div class="input-group">
@@ -183,7 +183,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="newTeam">বন্ধুকে আপনার দলে আনুন (আপনার দলের নাম)</label>
+                    <label for="newTeam">বন্ধুকে আপনার দলে আনুন( আপনার দলের নাম)</label>
                     <input type="text" id="newTeam" required placeholder="যেমন: পর্তুগাল, ফ্রান্স">
                 </div>
 
@@ -198,72 +198,57 @@
     </div>
 
     <script>
-        const apiURL = '/api/submit';
+       // এখন আর এখানে কোনো বড় লিঙ্কের দরকার নেই, ডিরেক্ট ভারসেল এপিআই রাউট
+const apiURL = '/api/submit';
 
-        document.getElementById('transferForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const name = document.getElementById('userName').value;
-            const currentTeam = document.getElementById('currentTeam').value;
-            const newTeam = document.getElementById('newTeam').value;
+document.getElementById('transferForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const name = document.getElementById('userName').value;
+    const currentTeam = document.getElementById('currentTeam').value;
+    const newTeam = document.getElementById('newTeam').value;
 
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'তথ্য জমা হচ্ছে...';
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'তথ্য জমা হচ্ছে...';
 
-            const payload = {
-                Name: name,
-                CurrentTeam: currentTeam,
-                NewTeam: newTeam
-            };
+    // ডাটা JSON অবজেক্ট হিসেবে পাঠানো হচ্ছে
+    const payload = {
+        Name: name,
+        CurrentTeam: currentTeam,
+        NewTeam: newTeam
+    };
 
-            // ১. ব্যাকএন্ডে ডাটা পোস্ট করা
-            fetch(apiURL, { 
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload) 
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response structure issue');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if(data.success) {
-                    showSuccessState(name, currentTeam, newTeam);
-                } else {
-                    throw new Error(data.error || 'Failed');
-                }
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                // সেফগার্ড বাইপাস: স্ক্রিপ্ট এন্ডপয়েন্ট কোনো রেসপন্স না দিলেও ইউজার যেন নাম দেখতে পায়
-                showSuccessState(name, currentTeam, newTeam);
-            });
-        });
-
-        // সাকসেস স্টেট ও রিডাইরেকশন হ্যান্ডলার ফাংশন
-        function showSuccessState(name, current, newTeam) {
-            const submitBtn = document.getElementById('submitBtn');
+    fetch(apiURL, { 
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
             submitBtn.innerText = 'স্বাক্ষরিত হয়েছে';
             document.getElementById('pdfActionArea').style.display = 'block';
 
             document.getElementById('downloadPdfBtn').onclick = function() {
-                const targetURL = `contract.html?name=${encodeURIComponent(name)}&current=${encodeURIComponent(current)}&new=${encodeURIComponent(newTeam)}`;
+                const targetURL = `contract.html?name=${encodeURIComponent(name)}&current=${encodeURIComponent(currentTeam)}&new=${encodeURIComponent(newTeam)}`;
                 window.location.href = targetURL;
             };
 
             document.getElementById('transferForm').reset();
+        } else {
+            throw new Error(data.error || 'Failed');
         }
+    })
+    .catch(error => {
+        console.error('Error!', error.message);
+        alert('কোথাও ভুল হয়েছে! আবার চেষ্টা করুন।');
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'চুক্তিপত্র স্বাক্ষর করুন';
+    });
+});
     </script>
-
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-
 </body>
 </html>

@@ -1,0 +1,20 @@
+{
+  "name": "fifa-world-cup-2026",
+  "version": "1.0.0",
+  "description": "FIFA World Cup 2026 team transfer contract application",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build required for static HTML'",
+    "deploy": "vercel"
+  },
+  "keywords": [
+    "fifa",
+    "world-cup",
+    "2026"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
